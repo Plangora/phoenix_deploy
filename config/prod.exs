@@ -12,7 +12,8 @@ use Mix.Config
 config :phoenix_deploy, PhoenixDeployWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: "178.128.22.104", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
