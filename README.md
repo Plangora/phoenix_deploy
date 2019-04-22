@@ -1,19 +1,53 @@
-# PhoenixDeploy
+# Deploy Phoenix App on Heroku
 
-To start your Phoenix server:
+## Heroku Setup
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+Official Phoenix guides cover this. Can check them out [here](https://hexdocs.pm/phoenix/heroku.html#content)
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### Buildpacks to Add to Heroku App
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+```
+https://github.com/HashNuke/heroku-buildpack-elixir.git
+https://github.com/behe/heroku-buildpack-phoenix-static
+https://github.com/gigalixir/gigalixir-buildpack-distillery.git
+```
 
-## Learn more
+### Set ENV Variables
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Copy secret from `config/prod.secret.exs` or generate a new secret with `mix phx.gen.secret` and add ENV variable called `SECRET_KEY_BASE` to Heroku.
+
+## Configure App
+
+### Add Distillery Dep
+
+```elixir
+{:distillery, "~> 2.0", warn_missing: false}
+```
+
+Setup distillery: `mix release.init`
+
+### Add Procfile
+Content: `web: /app/_build/prod/rel/phoenix_deploy/bin/phoenix_deploy foreground`. 
+
+### Update Prod Config
+
+Remove `import_config "prod.secret.exs"` line
+
+Update Endpoint configuration:
+```
+config :phoenix_deploy, PhoenixDeployWeb.Endpoint,
+  http: [:inet6, port: {:system, "PORT"}],
+  url: [scheme: "https", host: "phoenix-deploy.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  server: true
+```
+
+### Add Elixir Config file
+Filename: `elixir_buildpack.config`
+Content:
+```
+elixir_version=1.8.1
+erlang_version=21.3.3
+```
