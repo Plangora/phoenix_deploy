@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: phoenix-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: phoenix-deploy
+    spec:
+      containers:
+        - name: phoenix-deploy
+          image: plangora/phoenix_deploy
+          ports:
+            - containerPort: 4000
+          env:
+            - name: APP_HOST
+              value: "localhost"
+            - name: SECRET_KEY_BASE
+              value: "Qd++UgdlyXDzXp6bVILg7ZycN5o2BIbraPiIH0/7fz6qLIwh+d510h6jjjscRCNb"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phoenix-deploy
+spec:
+  type: NodePort
+  ports:
+    - port: 4000
+  selector:
+    app: phoenix-deploy
