@@ -1,4 +1,4 @@
-FROM plangora/alpine-elixir-phoenix:otp-22.0.1-elixir-1.8.2 as phx-builder
+FROM plangora/alpine-elixir-phoenix:otp-22.0.4-elixir-1.9.0 as phx-builder
 
 ENV PORT=4000 MIX_ENV=prod
 
@@ -11,7 +11,7 @@ RUN mix deps.get && cd assets/ && \
     cd - && \
     mix do compile, phx.digest, release
 
-FROM bitwalker/alpine-erlang:22.0.1
+FROM bitwalker/alpine-erlang:22.0.4
 
 EXPOSE 4000
 ENV PORT=4000 MIX_ENV=prod
@@ -21,4 +21,4 @@ RUN chown -R default /opt/app/
 
 USER default
 
-CMD ["/opt/app/bin/phoenix_deploy", "foreground"]
+CMD ["/opt/app/bin/phoenix_deploy", "start"]
