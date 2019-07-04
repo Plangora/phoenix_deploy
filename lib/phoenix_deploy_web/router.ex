@@ -2,6 +2,7 @@ defmodule PhoenixDeployWeb.Router do
   use PhoenixDeployWeb, :router
 
   pipeline :browser do
+    plug Plug.Logger
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
@@ -17,6 +18,10 @@ defmodule PhoenixDeployWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/", PhoenixDeployWeb do
+    get "/health-check", PageController, :health_check
   end
 
   # Other scopes may use custom stacks.

@@ -1,4 +1,4 @@
-# Deploy Phoenix App on Kubernetes with Elixir 1.9
+# Deploy Phoenix App on Kubernetes with Elixir 1.9 with Health Check
 
 Can deploy this app on Digital Ocean Managed Kuberenetes. Apply for \$100 credit with Digital Ocean using [this link](https://m.do.co/c/b880985e5d50)
 
@@ -16,4 +16,4 @@ kubectl apply -f k8s.yml
 
 ## Reference Video
 
-[https://youtu.be/ZxbtmDud2tc](https://youtu.be/ZxbtmDud2tc)
+[https://youtu.be/0ivu_7oES7U](https://youtu.be/0ivu_7oES7U)
