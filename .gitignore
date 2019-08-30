@@ -42,3 +42,7 @@ npm-debug.log
 /config/*.secret.exs
 
 .deliver/releases/
+
+# Ignore IntelliJ
+*.iml
+.idea/*

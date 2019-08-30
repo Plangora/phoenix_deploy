@@ -9,9 +9,9 @@ defmodule PhoenixDeploy.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      PhoenixDeployWeb.Endpoint
+      PhoenixDeployWeb.Endpoint,
       # Starts a worker by calling: PhoenixDeploy.Worker.start_link(arg)
-      # {PhoenixDeploy.Worker, arg},
+      PhoenixDeploy.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

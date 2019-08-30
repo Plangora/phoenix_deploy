@@ -8,3 +8,9 @@ config :phoenix_deploy, PhoenixDeployWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :phoenix_deploy, PhoenixDeploy.Repo,
+       database: "phoenix_deploy_test",
+       username: "postgres",
+       password: "postgres",
+       hostname: "localhost"

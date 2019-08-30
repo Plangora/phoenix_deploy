@@ -1,19 +1,7 @@
-# Deploy Phoenix App on Kubernetes with Elixir 1.9 with Health Check
+# Add Ecto to Phoenix
 
-Can deploy this app on Digital Ocean Managed Kuberenetes. Apply for \$100 credit with Digital Ocean using [this link](https://m.do.co/c/b880985e5d50)
-
-## Image Build
-
-Build image with:
-```bash
-docker build -t tag-name .
-```
-
-## Setup K8s Service
-```bash
-kubectl apply -f k8s.yml
-```
+Support our channel by trying out Digital Ocean with our [referral link](https://m.do.co/c/b880985e5d50)!
 
 ## Reference Video
 
-[https://youtu.be/0ivu_7oES7U](https://youtu.be/0ivu_7oES7U)
+[https://youtu.be/LKFFNGwDXzw](https://youtu.be/LKFFNGwDXzw)
